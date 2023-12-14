@@ -99,12 +99,97 @@ int checkThreeBrock(int board[SIZE][SIZE], int FstPlayer, int SecPlayer, int row
 
 //4並び判定(追加条項、削除不可)
 int checkFourBrock(int board[SIZE][SIZE], int FstPlayer, int SecPlayer, int row, int col, int gradient){
+    switch(gradient){
+        case 0:     //横
+            if((col-4 >= 0 && col+4 < SIZE && board[row][col-5] != FstPlayer && board[row][col-4] == FstPlayer && board[row][col-3] == FstPlayer && board[row][col-2] == FstPlayer && 
+                    board[row][col-1] == 0 && board[row][col+1] == 0 && board[row][col+2] == FstPlayer && board[row][col+3] == FstPlayer && board[row][col+4] == FstPlayer && board[row][col+5] != FstPlayer) ||
+               (col-3 >= 0 && col+3 < SIZE && board[row][col-4] != FstPlayer && board[row][col-3] == FstPlayer && board[row][col-2] == 0 && 
+                    board[row][col-1] == FstPlayer && board[row][col+1] == FstPlayer && board[row][col+2] == 0 && board[row][col+3] == FstPlayer && board[row][col+4] != FstPlayer) ||
+               (col-4 >= 0 && col+3 < SIZE && board[row][col-5] != FstPlayer && board[row][col-4] == FstPlayer && board[row][col-3] == FstPlayer && board[row][col-2] == 0 && 
+                    board[row][col-1] == FstPlayer && board[row][col+1] == 0 && board[row][col+2] == FstPlayer && board[row][col+3] == FstPlayer && board[row][col+4] != FstPlayer) ||
+               (col-3 >= 0 && col+4 < SIZE && board[row][col+5] != FstPlayer && board[row][col+4] == FstPlayer && board[row][col+3] == FstPlayer && board[row][col+2] == 0 && 
+                    board[row][col+1] == FstPlayer && board[row][col-1] == 0 && board[row][col-2] == FstPlayer && board[row][col-3] == FstPlayer && board[row][col-4] != FstPlayer) ||
+               (col-4 >= 0 && col+2 < SIZE && board[row][col-5] != FstPlayer && board[row][col-4] == FstPlayer && board[row][col-3] == 0 && board[row][col-2] == FstPlayer && 
+                    board[row][col-1] == FstPlayer && board[row][col+1] == 0 && board[row][col+2] == FstPlayer && board[row][col+3] != FstPlayer) ||
+               (col-2 >= 0 && col+4 < SIZE && board[row][col+5] != FstPlayer && board[row][col+4] == FstPlayer && board[row][col+3] == 0 && board[row][col+2] == FstPlayer && 
+                    board[row][col+1] == FstPlayer && board[row][col-1] == 0 && board[row][col-2] == FstPlayer && board[row][col-3] != FstPlayer)){
+                return 2; //直線上の四四禁
+            }
 
+            if((col-4 >= 0 && col+1 < SIZE && board[row][col-4] == 0 && board[row][col-3] == FstPlayer && board[row][col-2] == FstPlayer && board[row][col-1] == 0 && board[row][col+1] == 0) ||
+               (col-4 >= 0 && col+1 < SIZE && board[row][col-4] == 0 && board[row][col-3] == FstPlayer && board[row][col-2] == 0 && board[row][col-1] == FstPlayer && board[row][col+1] == 0) || 
+               (col-4 >= 0 && col+2 < SIZE && board[row][col-4] == 0 && board[row][col-3] == 0 && board[row][col-2] == FstPlayer && board[row][col-1] == FstPlayer && board[row][col+1] == 0 && board[row][col+2] == 0) ||
+               (col-3 >= 0 && col+2 < SIZE && board[row][col-3] == 0 && board[row][col-2] == FstPlayer && board[row][col-1] == 0 && board[row][col+1] == FstPlayer && board[row][col+2] == 0) ||
+               (col-2 >= 0 && col+3 < SIZE && board[row][col-2] == 0 && board[row][col-1] == FstPlayer && board[row][col+1] == 0 && board[row][col+2] == FstPlayer && board[row][col+3] == 0) ||
+               (col-3 >= 0 && col+3 < SIZE && board[row][col-3] == 0 && board[row][col-2] == 0 && board[row][col-1] == FstPlayer && board[row][col+1] == FstPlayer && board[row][col+2] == 0 && board[row][col+3] == 0) ||
+               (col-1 >= 0 && col+4 < SIZE && board[row][col-1] == 0 && board[row][col+1] == FstPlayer && board[row][col+2] == 0 && board[row][col+3] == FstPlayer && board[row][col+4] == 0) ||
+               (col-1 >= 0 && col+4 < SIZE && board[row][col-1] == 0 && board[row][col+1] == 0 && board[row][col+2] == FstPlayer && board[row][col+3] == FstPlayer && board[row][col+4] == 0) ||
+               (col-2 >= 0 && col+4 < SIZE && board[row][col-2] == 0 && board[row][col-1] == 0 && board[row][col+1] == FstPlayer && board[row][col+2] == FstPlayer && board[row][col+3] == 0 && board[row][col+4] == 0)) {
+                return 1;
+            }
+            break;
+        case 1:     //縦
+            if((row-4 >= 0 && row+4 < SIZE && board[row-5][col] != FstPlayer && board[row-4][col] == FstPlayer && board[row-3][col] == FstPlayer && board[row-2][col] == FstPlayer && 
+                    board[row-1][col] == 0 && board[row+1][col] == 0 && board[row+2][col] == FstPlayer && board[row+3][col] == FstPlayer && board[row+4][col] == FstPlayer && board[row+5][col] != FstPlayer) ||
+               (row-3 >= 0 && row+3 < SIZE && board[row-4][col] != FstPlayer && board[row-3][col] == FstPlayer && board[row-2][col] == 0 && 
+                    board[row-1][col] == FstPlayer && board[row+1][col] == FstPlayer && board[row+2][col] == 0 && board[row+3][col] == FstPlayer && board[row+4][col] != FstPlayer) ||
+               (row-4 >= 0 && row+3 < SIZE && board[row-5][col] != FstPlayer && board[row-4][col] == FstPlayer && board[row-3][col] == FstPlayer && board[row-2][col] == 0 && 
+                    board[row-1][col] == FstPlayer && board[row+1][col] == 0 && board[row+2][col] == FstPlayer && board[row+3][col] == FstPlayer && board[row+4][col] != FstPlayer) ||
+               (row-3 >= 0 && row+4 < SIZE && board[row+5][col] != FstPlayer && board[row+4][col] == FstPlayer && board[row+3][col] == FstPlayer && board[row+2][col] == 0 && 
+                    board[row+1][col] == FstPlayer && board[row-1][col] == 0 && board[row-2][col] == FstPlayer && board[row-3][col] == FstPlayer && board[row-4][col] != FstPlayer) ||
+               (row-4 >= 0 && row+2 < SIZE && board[row-5][col] != FstPlayer && board[row-4][col] == FstPlayer && board[row-3][col] == 0 && board[row-2][col] == FstPlayer && 
+                    board[row-1][col] == FstPlayer && board[row+1][col] == 0 && board[row+2][col] == FstPlayer && board[row+3][col] != FstPlayer) ||
+               (row-2 >= 0 && row+4 < SIZE && board[row+5][col] != FstPlayer && board[row+4][col] == FstPlayer && board[row+3][col] == 0 && board[row+2][col] == FstPlayer && 
+                    board[row+1][col] == FstPlayer && board[row-1][col] == 0 && board[row-2][col] == FstPlayer && board[row-3][col] != FstPlayer)){
+                return 2; //直線上の四四禁
+            }
+
+            break;
+        case 2:     //左上から右下
+            if((row-4 >= 0 && row+4 < SIZE && col-4 >= 0 && col+4 < SIZE && board[row-5][col-5] != FstPlayer && board[row-4][col-4] == FstPlayer && board[row-3][col-3] == FstPlayer && board[row-2][col-2] == FstPlayer && 
+                    board[row-1][col-1] == 0 && board[row+1][col+1] == 0 && board[row+2][col+2] == FstPlayer && board[row+3][col+3] == FstPlayer && board[row+4][col+4] == FstPlayer && board[row+5][col+5] != FstPlayer) ||
+               (row-3 >= 0 && row+3 < SIZE && col-3 >= 0 && col+3 < SIZE && board[row-4][col-4] != FstPlayer && board[row-3][col-3] == FstPlayer && board[row-2][col-2] == 0 && 
+                    board[row-1][col-1] == FstPlayer && board[row+1][col+1] == FstPlayer && board[row+2][col+2] == 0 && board[row+3][col+3] == FstPlayer && board[row+4][col+4] != FstPlayer) ||
+               (row-4 >= 0 && row+3 < SIZE && col-4 >= 0 && col+3 < SIZE && board[row-5][col-5] != FstPlayer && board[row-4][col-4] == FstPlayer && board[row-3][col-3] == FstPlayer && board[row-2][col-2] == 0 && 
+                    board[row-1][col-1] == FstPlayer && board[row+1][col+1] == 0 && board[row+2][col+2] == FstPlayer && board[row+3][col+3] == FstPlayer && board[row+4][col+4] != FstPlayer) ||
+               (row-3 >= 0 && row+4 < SIZE && col-3 >= 0 && col+4 < SIZE && board[row+5][col+5] != FstPlayer && board[row+4][col+4] == FstPlayer && board[row+3][col+3] == FstPlayer && board[row+2][col+2] == 0 && 
+                    board[row+1][col+1] == FstPlayer && board[row-1][col-1] == 0 && board[row-2][col-2] == FstPlayer && board[row-3][col-3] == FstPlayer && board[row-4][col-4] != FstPlayer) ||
+               (row-4 >= 0 && row+2 < SIZE && col-4 >= 0 && col+2 < SIZE && board[row-5][col-5] != FstPlayer && board[row-4][col-4] == FstPlayer && board[row-3][col-3] == 0 && board[row-2][col-2] == FstPlayer && 
+                    board[row-1][col-1] == FstPlayer && board[row+1][col+1] == 0 && board[row+2][col+2] == FstPlayer && board[row+3][col+3] != FstPlayer) ||
+               (row-2 >= 0 && row+4 < SIZE && col-2 >= 0 && col+4 < SIZE && board[row+5][col+5] != FstPlayer && board[row+4][col+4] == FstPlayer && board[row+3][col+3] == 0 && board[row+2][col+2] == FstPlayer && 
+                    board[row+1][col+1] == FstPlayer && board[row-1][col-1] == 0 && board[row-2][col-2] == FstPlayer && board[row-3][col-3] != FstPlayer)){
+                return 2; //直線上の四四禁
+            }
+
+            break;
+        case 3:     //右上から左下
+            if((row-4 >= 0 && row+4 < SIZE && col-4 >= 0 && col+4 < SIZE && board[row-5][col+5] != FstPlayer && board[row-4][col+4] == FstPlayer && board[row-3][col+3] == FstPlayer && board[row-2][col+2] == FstPlayer && 
+                    board[row-1][col+1] == 0 && board[row+1][col-1] == 0 && board[row+2][col-2] == FstPlayer && board[row+3][col-3] == FstPlayer && board[row+4][col-4] == FstPlayer && board[row+5][col-5] != FstPlayer) ||
+               (row-3 >= 0 && row+3 < SIZE && col-3 >= 0 && col+3 < SIZE && board[row-4][col+4] != FstPlayer && board[row-3][col+3] == FstPlayer && board[row-2][col+2] == 0 && 
+                    board[row-1][col+1] == FstPlayer && board[row+1][col-1] == FstPlayer && board[row+2][col-2] == 0 && board[row+3][col-3] == FstPlayer && board[row+4][col-4] != FstPlayer) ||
+               (row-4 >= 0 && row+3 < SIZE && col-3 >= 0 && col+4 < SIZE && board[row-5][col+5] != FstPlayer && board[row-4][col+4] == FstPlayer && board[row-3][col+3] == FstPlayer && board[row-2][col+2] == 0 && 
+                    board[row-1][col+1] == FstPlayer && board[row+1][col-1] == 0 && board[row+2][col-2] == FstPlayer && board[row+3][col-3] == FstPlayer && board[row+4][col-4] != FstPlayer) ||
+               (row-3 >= 0 && row+4 < SIZE && col-4 >= 0 && col+3 < SIZE && board[row+5][col-5] != FstPlayer && board[row+4][col-4] == FstPlayer && board[row+3][col-3] == FstPlayer && board[row+2][col-2] == 0 && 
+                    board[row+1][col-1] == FstPlayer && board[row-1][col+1] == 0 && board[row-2][col+2] == FstPlayer && board[row-3][col+3] == FstPlayer && board[row-4][col+4] != FstPlayer) ||
+               (row-4 >= 0 && row+2 < SIZE && col-2 >= 0 && col+4 < SIZE && board[row-5][col+5] != FstPlayer && board[row-4][col+4] == FstPlayer && board[row-3][col+3] == 0 && board[row-2][col+2] == FstPlayer && 
+                    board[row-1][col+1] == FstPlayer && board[row+1][col-1] == 0 && board[row+2][col-2] == FstPlayer && board[row+3][col-3] != FstPlayer) ||
+               (row-2 >= 0 && row+4 < SIZE && col-4 >= 0 && col+2 < SIZE && board[row+5][col-5] != FstPlayer && board[row+4][col-4] == FstPlayer && board[row+3][col-3] == 0 && board[row+2][col-2] == FstPlayer && 
+                    board[row+1][col-1] == FstPlayer && board[row-1][col+1] == 0 && board[row-2][col+2] == FstPlayer && board[row-3][col+3] != FstPlayer)){
+                return 2; //直線上の四四禁
+            }
+
+            break;
+        default:
+            break;
+    }
+
+    return 0;
 }
 
 //禁じ手判定(追加条項、削除不可)
 int checkForbiddenMoves(int board[SIZE][SIZE], int FstPlayer, int SecPlayer, int row, int col){
 	int consecutiveCount = 0;
+    int checker = 0;
 	//三三禁
     for(int i = 0; i < 4; i++){
         if(checkThreeBrock(board,FstPlayer, SecPlayer, row, col, i)){
@@ -115,6 +200,12 @@ int checkForbiddenMoves(int board[SIZE][SIZE], int FstPlayer, int SecPlayer, int
 
 	//四四禁
     consecutiveCount = 0;
+    for(int i = 0; i < 4; i++){
+        checker = checkFourBrock(board,FstPlayer, SecPlayer, row, col, i);
+        if(checker == 2) return 1; //禁じ手
+        if(checker == 1) consecutiveCount++;
+    }
+    if(consecutiveCount >=2) return 1; //禁じ手
 
 	//長連
 	// 横方向
