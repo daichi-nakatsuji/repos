@@ -116,15 +116,22 @@ int checkFourBrock(int board[SIZE][SIZE], int FstPlayer, int SecPlayer, int row,
                 return 2; //直線上の四四禁
             }
 
-            if((col-4 >= 0 && col+1 < SIZE && board[row][col-4] == 0 && board[row][col-3] == FstPlayer && board[row][col-2] == FstPlayer && board[row][col-1] == 0 && board[row][col+1] == 0) ||
-               (col-4 >= 0 && col+1 < SIZE && board[row][col-4] == 0 && board[row][col-3] == FstPlayer && board[row][col-2] == 0 && board[row][col-1] == FstPlayer && board[row][col+1] == 0) || 
-               (col-4 >= 0 && col+2 < SIZE && board[row][col-4] == 0 && board[row][col-3] == 0 && board[row][col-2] == FstPlayer && board[row][col-1] == FstPlayer && board[row][col+1] == 0 && board[row][col+2] == 0) ||
-               (col-3 >= 0 && col+2 < SIZE && board[row][col-3] == 0 && board[row][col-2] == FstPlayer && board[row][col-1] == 0 && board[row][col+1] == FstPlayer && board[row][col+2] == 0) ||
-               (col-2 >= 0 && col+3 < SIZE && board[row][col-2] == 0 && board[row][col-1] == FstPlayer && board[row][col+1] == 0 && board[row][col+2] == FstPlayer && board[row][col+3] == 0) ||
-               (col-3 >= 0 && col+3 < SIZE && board[row][col-3] == 0 && board[row][col-2] == 0 && board[row][col-1] == FstPlayer && board[row][col+1] == FstPlayer && board[row][col+2] == 0 && board[row][col+3] == 0) ||
-               (col-1 >= 0 && col+4 < SIZE && board[row][col-1] == 0 && board[row][col+1] == FstPlayer && board[row][col+2] == 0 && board[row][col+3] == FstPlayer && board[row][col+4] == 0) ||
-               (col-1 >= 0 && col+4 < SIZE && board[row][col-1] == 0 && board[row][col+1] == 0 && board[row][col+2] == FstPlayer && board[row][col+3] == FstPlayer && board[row][col+4] == 0) ||
-               (col-2 >= 0 && col+4 < SIZE && board[row][col-2] == 0 && board[row][col-1] == 0 && board[row][col+1] == FstPlayer && board[row][col+2] == FstPlayer && board[row][col+3] == 0 && board[row][col+4] == 0)) {
+            if((col-3 >= 0 && col+1 < SIZE && board[row][col-4] != FstPlayer && board[row][col-3] == FstPlayer && board[row][col-2] == FstPlayer && board[row][col-1] == 0 && board[row][col+1] == FstPlayer && board[row][col+2] != FstPlayer) ||
+               (col-3 >= 0 && col+1 < SIZE && board[row][col-4] != FstPlayer && board[row][col-3] == FstPlayer && board[row][col-2] == 0 && board[row][col-1] == FstPlayer && board[row][col+1] == FstPlayer && board[row][col+2] != FstPlayer) ||
+               (col-2 >= 0 && col+1 < SIZE && board[row][col-3] != FstPlayer && board[row][col-2] == FstPlayer && board[row][col-1] == FstPlayer && board[row][col+1] == FstPlayer && board[row][col+2] != FstPlayer) || 
+               (col-2 >= 0 && col+2 < SIZE && board[row][col-3] != FstPlayer && board[row][col-2] == FstPlayer && board[row][col-1] == FstPlayer && board[row][col+1] == 0 && board[row][col+2] == FstPlayer && board[row][col+3] != FstPlayer) ||
+               (col-1 >= 0 && col+3 < SIZE && board[row][col-2] != FstPlayer && board[row][col-1] == FstPlayer && board[row][col+1] == FstPlayer && board[row][col+2] == 0 && board[row][col+3] == FstPlayer && board[row][col+4] != FstPlayer) ||
+               (col-2 >= 0 && col+2 < SIZE && board[row][col-3] != FstPlayer && board[row][col-2] == FstPlayer && board[row][col-1] == 0 && board[row][col+1] == FstPlayer && board[row][col+2] == FstPlayer && board[row][col+3] != FstPlayer) ||
+               (col-1 >= 0 && col+2 < SIZE && board[row][col-2] != FstPlayer && board[row][col-1] == FstPlayer && board[row][col+1] == FstPlayer && board[row][col+2] == FstPlayer && board[row][col+3] != FstPlayer) || 
+               (col-1 >= 0 && col+3 < SIZE && board[row][col-2] != FstPlayer && board[row][col-1] == FstPlayer && board[row][col+1] == 0 && board[row][col+2] == FstPlayer && board[row][col+3] == FstPlayer && board[row][col+4] != FstPlayer) ||
+               (col+3 < SIZE && board[row][col-1] != FstPlayer && board[row][col+1] == FstPlayer && board[row][col+2] == FstPlayer && board[row][col+3] == FstPlayer && board[row][col+4] != FstPlayer) ||
+               (col+4 < SIZE && board[row][col-1] != FstPlayer && board[row][col+1] == FstPlayer && board[row][col+2] == 0 && board[row][col+3] == FstPlayer && board[row][col+4] == FstPlayer && board[row][col+5] != FstPlayer) ||
+               (col+4 < SIZE && board[row][col-1] != FstPlayer && board[row][col+1] == FstPlayer && board[row][col+2] == FstPlayer && board[row][col+3] == 0 && board[row][col+4] == FstPlayer && board[row][col+5] != FstPlayer) ||
+               (col+4 < SIZE && board[row][col-1] != FstPlayer && board[row][col+1] == 0 && board[row][col+2] == FstPlayer && board[row][col+3] == FstPlayer && board[row][col+4] == FstPlayer && board[row][col+5] != FstPlayer) ||
+               (col-3 >= 0 && board[row][col+1] != FstPlayer && board[row][col-1] == FstPlayer && board[row][col-2] == FstPlayer && board[row][col-3] == FstPlayer && board[row][col-4] != FstPlayer) ||
+               (col-4 >= 0 && board[row][col+1] != FstPlayer && board[row][col-1] == FstPlayer && board[row][col-2] == 0 && board[row][col-3] == FstPlayer && board[row][col-4] == FstPlayer && board[row][col-5] != FstPlayer) ||
+               (col-4 >= 0 && board[row][col+1] != FstPlayer && board[row][col-1] == FstPlayer && board[row][col-2] == FstPlayer && board[row][col-3] == 0 && board[row][col-4] == FstPlayer && board[row][col-5] != FstPlayer) ||
+               (col-4 >= 0 && board[row][col+1] != FstPlayer && board[row][col-1] == 0 && board[row][col-2] == FstPlayer && board[row][col-3] == FstPlayer && board[row][col-4] == FstPlayer && board[row][col-5] != FstPlayer)) {
                 return 1;
             }
             break;
@@ -144,6 +151,25 @@ int checkFourBrock(int board[SIZE][SIZE], int FstPlayer, int SecPlayer, int row,
                 return 2; //直線上の四四禁
             }
 
+            if((row-3 >= 0 && row+1 < SIZE && board[row-4][col] != FstPlayer && board[row-3][col] == FstPlayer && board[row-2][col] == FstPlayer && board[row-1][col] == 0 && board[row+1][col] == FstPlayer && board[row+2][col] != FstPlayer) ||
+               (row-3 >= 0 && row+1 < SIZE && board[row-4][col] != FstPlayer && board[row-3][col] == FstPlayer && board[row-2][col] == 0 && board[row-1][col] == FstPlayer && board[row+1][col] == FstPlayer && board[row+2][col] != FstPlayer) ||
+               (row-2 >= 0 && row+1 < SIZE && board[row-3][col] != FstPlayer && board[row-2][col] == FstPlayer && board[row-1][col] == FstPlayer && board[row+1][col] == FstPlayer && board[row+2][col] != FstPlayer) || 
+               (row-2 >= 0 && row+2 < SIZE && board[row-3][col] != FstPlayer && board[row-2][col] == FstPlayer && board[row-1][col] == FstPlayer && board[row+1][col] == 0 && board[row+2][col] == FstPlayer && board[row+3][col] != FstPlayer) ||
+               (row-1 >= 0 && row+3 < SIZE && board[row-2][col] != FstPlayer && board[row-1][col] == FstPlayer && board[row+1][col] == FstPlayer && board[row+2][col] == 0 && board[row+3][col] == FstPlayer && board[row+4][col] != FstPlayer) ||
+               (row-2 >= 0 && row+2 < SIZE && board[row-3][col] != FstPlayer && board[row-2][col] == FstPlayer && board[row-1][col] == 0 && board[row+1][col] == FstPlayer && board[row+2][col] == FstPlayer && board[row+3][col] != FstPlayer) ||
+               (row-1 >= 0 && row+2 < SIZE && board[row-2][col] != FstPlayer && board[row-1][col] == FstPlayer && board[row+1][col] == FstPlayer && board[row+2][col] == FstPlayer && board[row+3][col] != FstPlayer) || 
+               (row-1 >= 0 && row+3 < SIZE && board[row-2][col] != FstPlayer && board[row-1][col] == FstPlayer && board[row+1][col] == 0 && board[row+2][col] == FstPlayer && board[row+3][col] == FstPlayer && board[row+4][col] != FstPlayer) ||
+               (row+3 < SIZE && board[row-1][col] != FstPlayer && board[row+1][col] == FstPlayer && board[row+2][col] == FstPlayer && board[row+3][col] == FstPlayer && board[row+4][col] != FstPlayer) ||
+               (row+4 < SIZE && board[row-1][col] != FstPlayer && board[row+1][col] == FstPlayer && board[row+2][col] == 0 && board[row+3][col] == FstPlayer && board[row+4][col] == FstPlayer && board[row-5][col] != FstPlayer) ||
+               (row+4 < SIZE && board[row-1][col] != FstPlayer && board[row+1][col] == FstPlayer && board[row+2][col] == FstPlayer && board[row+3][col] == 0 && board[row+4][col] == FstPlayer && board[row-5][col] != FstPlayer) ||
+               (row+4 < SIZE && board[row-1][col] != FstPlayer && board[row+1][col] == 0 && board[row+2][col] == FstPlayer && board[row+3][col] == FstPlayer && board[row+4][col] == FstPlayer && board[row-5][col] != FstPlayer) ||
+               (row-3 >= 0 && board[row+1][col] != FstPlayer && board[row-1][col] == FstPlayer && board[row-2][col] == FstPlayer && board[row-3][col] == FstPlayer && board[row-4][col] != FstPlayer) ||
+               (row-4 >= 0 && board[row+1][col] != FstPlayer && board[row-1][col] == FstPlayer && board[row-2][col] == 0 && board[row-3][col] == FstPlayer && board[row-4][col] == FstPlayer && board[row-5][col] != FstPlayer) ||
+               (row-4 >= 0 && board[row+1][col] != FstPlayer && board[row-1][col] == FstPlayer && board[row-2][col] == FstPlayer && board[row-3][col] == 0 && board[row-4][col] == FstPlayer && board[row-5][col] != FstPlayer) ||
+               (row-4 >= 0 && board[row+1][col] != FstPlayer && board[row-1][col] == 0 && board[row-2][col] == FstPlayer && board[row-3][col] == FstPlayer && board[row-4][col] == FstPlayer && board[row-5][col] != FstPlayer)) {
+                return 1;
+            }
+
             break;
         case 2:     //左上から右下
             if((row-4 >= 0 && row+4 < SIZE && col-4 >= 0 && col+4 < SIZE && board[row-5][col-5] != FstPlayer && board[row-4][col-4] == FstPlayer && board[row-3][col-3] == FstPlayer && board[row-2][col-2] == FstPlayer && 
@@ -161,6 +187,25 @@ int checkFourBrock(int board[SIZE][SIZE], int FstPlayer, int SecPlayer, int row,
                 return 2; //直線上の四四禁
             }
 
+            if((row-3 >= 0 && row+1 < SIZE && col-3 >= 0 && col+1 < SIZE && board[row-4][col-4] != FstPlayer && board[row-3][col-3] == FstPlayer && board[row-2][col-2] == FstPlayer && board[row-1][col-1] == 0 && board[row+1][col+1] == FstPlayer && board[row+2][col+2] != FstPlayer) ||
+               (row-3 >= 0 && row+1 < SIZE && col-3 >= 0 && col+1 < SIZE && board[row-4][col-4] != FstPlayer && board[row-3][col-3] == FstPlayer && board[row-2][col-2] == 0 && board[row-1][col-1] == FstPlayer && board[row+1][col+1] == FstPlayer && board[row+2][col+2] != FstPlayer) ||
+               (row-2 >= 0 && row+1 < SIZE && col-2 >= 0 && col+1 < SIZE && board[row-3][col-3] != FstPlayer && board[row-2][col-2] == FstPlayer && board[row-1][col-1] == FstPlayer && board[row+1][col+1] == FstPlayer && board[row+2][col+2] != FstPlayer) || 
+               (row-2 >= 0 && row+2 < SIZE && col-2 >= 0 && col+2 < SIZE && board[row-3][col-3] != FstPlayer && board[row-2][col-2] == FstPlayer && board[row-1][col-1] == FstPlayer && board[row+1][col+1] == 0 && board[row+2][col+2] == FstPlayer && board[row+3][col+3] != FstPlayer) ||
+               (row-1 >= 0 && row+3 < SIZE && col-1 >= 0 && col+3 < SIZE && board[row-2][col-2] != FstPlayer && board[row-1][col-1] == FstPlayer && board[row+1][col+1] == FstPlayer && board[row+2][col+2] == 0 && board[row+3][col+3] == FstPlayer && board[row+4][col+4] != FstPlayer) ||
+               (row-2 >= 0 && row+2 < SIZE && col-2 >= 0 && col+2 < SIZE && board[row-3][col-3] != FstPlayer && board[row-2][col-2] == FstPlayer && board[row-1][col-1] == 0 && board[row+1][col+1] == FstPlayer && board[row+2][col+2] == FstPlayer && board[row+3][col+3] != FstPlayer) ||
+               (row-1 >= 0 && row+2 < SIZE && col-1 >= 0 && col+2 < SIZE && board[row-2][col-2] != FstPlayer && board[row-1][col-1] == FstPlayer && board[row+1][col+1] == FstPlayer && board[row+2][col+2] == FstPlayer && board[row+3][col+3] != FstPlayer) || 
+               (row-1 >= 0 && row+3 < SIZE && col-1 >= 0 && col+3 < SIZE && board[row-2][col-2] != FstPlayer && board[row-1][col-1] == FstPlayer && board[row+1][col+1] == 0 && board[row+2][col+2] == FstPlayer && board[row+3][col+3] == FstPlayer && board[row+4][col+4] != FstPlayer) ||
+               (row+3 < SIZE && col+3 < SIZE && board[row-1][col-1] != FstPlayer && board[row+1][col+1] == FstPlayer && board[row+2][col+2] == FstPlayer && board[row+3][col+3] == FstPlayer && board[row+4][col+4] != FstPlayer) ||
+               (row+4 < SIZE && col+4 < SIZE && board[row-1][col-1] != FstPlayer && board[row+1][col+1] == FstPlayer && board[row+2][col+2] == 0 && board[row+3][col+3] == FstPlayer && board[row+4][col+4] == FstPlayer && board[row-5][col+5] != FstPlayer) ||
+               (row+4 < SIZE && col+4 < SIZE && board[row-1][col-1] != FstPlayer && board[row+1][col+1] == FstPlayer && board[row+2][col+2] == FstPlayer && board[row+3][col+3] == 0 && board[row+4][col+4] == FstPlayer && board[row-5][col+5] != FstPlayer) ||
+               (row+4 < SIZE && col+4 < SIZE && board[row-1][col-1] != FstPlayer && board[row+1][col+1] == 0 && board[row+2][col+2] == FstPlayer && board[row+3][col+3] == FstPlayer && board[row+4][col+4] == FstPlayer && board[row-5][col+5] != FstPlayer) ||
+               (row-3 >= 0 && col-3 >= 0 && board[row+1][col+1] != FstPlayer && board[row-1][col-1] == FstPlayer && board[row-2][col-2] == FstPlayer && board[row-3][col-3] == FstPlayer && board[row-4][col-4] != FstPlayer) ||
+               (row-4 >= 0 && col-4 >= 0 && board[row+1][col+1] != FstPlayer && board[row-1][col-1] == FstPlayer && board[row-2][col-2] == 0 && board[row-3][col-3] == FstPlayer && board[row-4][col-4] == FstPlayer && board[row-5][col-5] != FstPlayer) ||
+               (row-4 >= 0 && col-4 >= 0 && board[row+1][col+1] != FstPlayer && board[row-1][col-1] == FstPlayer && board[row-2][col-2] == FstPlayer && board[row-3][col-3] == 0 && board[row-4][col-4] == FstPlayer && board[row-5][col-5] != FstPlayer) ||
+               (row-4 >= 0 && col-4 >= 0 && board[row+1][col+1] != FstPlayer && board[row-1][col-1] == 0 && board[row-2][col-2] == FstPlayer && board[row-3][col-3] == FstPlayer && board[row-4][col-4] == FstPlayer && board[row-5][col-5] != FstPlayer)) {
+                return 1;
+            }
+
             break;
         case 3:     //右上から左下
             if((row-4 >= 0 && row+4 < SIZE && col-4 >= 0 && col+4 < SIZE && board[row-5][col+5] != FstPlayer && board[row-4][col+4] == FstPlayer && board[row-3][col+3] == FstPlayer && board[row-2][col+2] == FstPlayer && 
@@ -176,6 +221,25 @@ int checkFourBrock(int board[SIZE][SIZE], int FstPlayer, int SecPlayer, int row,
                (row-2 >= 0 && row+4 < SIZE && col-4 >= 0 && col+2 < SIZE && board[row+5][col-5] != FstPlayer && board[row+4][col-4] == FstPlayer && board[row+3][col-3] == 0 && board[row+2][col-2] == FstPlayer && 
                     board[row+1][col-1] == FstPlayer && board[row-1][col+1] == 0 && board[row-2][col+2] == FstPlayer && board[row-3][col+3] != FstPlayer)){
                 return 2; //直線上の四四禁
+            }
+
+            if((row-3 >= 0 && row+1 < SIZE && col-1 >= 0 && col+3 < SIZE && board[row-4][col+4] != FstPlayer && board[row-3][col+3] == FstPlayer && board[row-2][col+2] == FstPlayer && board[row-1][col+1] == 0 && board[row+1][col-1] == FstPlayer && board[row+2][col-2] != FstPlayer) ||
+               (row-3 >= 0 && row+1 < SIZE && col-1 >= 0 && col+3 < SIZE && board[row-4][col+4] != FstPlayer && board[row-3][col+3] == FstPlayer && board[row-2][col+2] == 0 && board[row-1][col+1] == FstPlayer && board[row+1][col-1] == FstPlayer && board[row+2][col-2] != FstPlayer) ||
+               (row-2 >= 0 && row+1 < SIZE && col-1 >= 0 && col+2 < SIZE && board[row-3][col+3] != FstPlayer && board[row-2][col+2] == FstPlayer && board[row-1][col+1] == FstPlayer && board[row+1][col-1] == FstPlayer && board[row+2][col-2] != FstPlayer) || 
+               (row-2 >= 0 && row+2 < SIZE && col-2 >= 0 && col+2 < SIZE && board[row-3][col+3] != FstPlayer && board[row-2][col+2] == FstPlayer && board[row-1][col+1] == FstPlayer && board[row+1][col-1] == 0 && board[row+2][col-2] == FstPlayer && board[row+3][col-3] != FstPlayer) ||
+               (row-1 >= 0 && row+3 < SIZE && col-3 >= 0 && col+1 < SIZE && board[row-2][col+2] != FstPlayer && board[row-1][col+1] == FstPlayer && board[row+1][col-1] == FstPlayer && board[row+2][col-2] == 0 && board[row+3][col-3] == FstPlayer && board[row+4][col-4] != FstPlayer) ||
+               (row-2 >= 0 && row+2 < SIZE && col-2 >= 0 && col+2 < SIZE && board[row-3][col+3] != FstPlayer && board[row-2][col+2] == FstPlayer && board[row-1][col+1] == 0 && board[row+1][col-1] == FstPlayer && board[row+2][col-2] == FstPlayer && board[row+3][col-3] != FstPlayer) ||
+               (row-1 >= 0 && row+2 < SIZE && col-2 >= 0 && col+1 < SIZE && board[row-2][col+2] != FstPlayer && board[row-1][col+1] == FstPlayer && board[row+1][col-1] == FstPlayer && board[row+2][col-2] == FstPlayer && board[row+3][col-3] != FstPlayer) || 
+               (row-1 >= 0 && row+3 < SIZE && col-3 >= 0 && col+1 < SIZE && board[row-2][col+2] != FstPlayer && board[row-1][col+1] == FstPlayer && board[row+1][col-1] == 0 && board[row+2][col-2] == FstPlayer && board[row+3][col-3] == FstPlayer && board[row+4][col-4] != FstPlayer) ||
+               (row+3 < SIZE && col-3 >= 0 && board[row-1][col+1] != FstPlayer && board[row+1][col-1] == FstPlayer && board[row+2][col-2] == FstPlayer && board[row+3][col-3] == FstPlayer && board[row+4][col-4] != FstPlayer) ||
+               (row+4 < SIZE && col-4 >= 0 && board[row-1][col+1] != FstPlayer && board[row+1][col-1] == FstPlayer && board[row+2][col-2] == 0 && board[row+3][col-3] == FstPlayer && board[row+4][col-4] == FstPlayer && board[row-5][col-5] != FstPlayer) ||
+               (row+4 < SIZE && col-4 >= 0 && board[row-1][col+1] != FstPlayer && board[row+1][col-1] == FstPlayer && board[row+2][col-2] == FstPlayer && board[row+3][col-3] == 0 && board[row+4][col-4] == FstPlayer && board[row-5][col-5] != FstPlayer) ||
+               (row+4 < SIZE && col-4 >= 0 && board[row-1][col+1] != FstPlayer && board[row+1][col-1] == 0 && board[row+2][col-2] == FstPlayer && board[row+3][col-3] == FstPlayer && board[row+4][col-4] == FstPlayer && board[row-5][col-5] != FstPlayer) ||
+               (row-3 >= 0 && col+3 < SIZE && board[row+1][col-1] != FstPlayer && board[row-1][col+1] == FstPlayer && board[row-2][col+2] == FstPlayer && board[row-3][col+3] == FstPlayer && board[row-4][col+4] != FstPlayer) ||
+               (row-4 >= 0 && col+4 < SIZE && board[row+1][col-1] != FstPlayer && board[row-1][col+1] == FstPlayer && board[row-2][col+2] == 0 && board[row-3][col+3] == FstPlayer && board[row-4][col+4] == FstPlayer && board[row-5][col+5] != FstPlayer) ||
+               (row-4 >= 0 && col+4 < SIZE && board[row+1][col-1] != FstPlayer && board[row-1][col+1] == FstPlayer && board[row-2][col+2] == FstPlayer && board[row-3][col+3] == 0 && board[row-4][col+4] == FstPlayer && board[row-5][col+5] != FstPlayer) ||
+               (row-4 >= 0 && col+4 < SIZE && board[row+1][col-1] != FstPlayer && board[row-1][col+1] == 0 && board[row-2][col+2] == FstPlayer && board[row-3][col+3] == FstPlayer && board[row-4][col+4] == FstPlayer && board[row-5][col+5] != FstPlayer)) {
+                return 1;
             }
 
             break;
