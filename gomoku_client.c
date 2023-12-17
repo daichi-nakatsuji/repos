@@ -609,7 +609,7 @@ int checkForbiddenMoves(int board[SIZE][SIZE], int FstPlayer, int SecPlayer, int
 	return 0;	//禁じ手なし
 }
 
-// 同時に三連と四連ができるかを判定する関数
+// 同時に三連と四連ができるかを判定する関数(変更したい)
 int checkThreeAndFourInRow(int board[SIZE][SIZE], int row, int col, int player) {
     // 与えられた座標に仮の手を打つ
     board[row][col] = player;
@@ -735,7 +735,7 @@ int checkWin(int board[SIZE][SIZE], int player, int row, int col) {
     return 0; // 勝利なし
 }
 
-// 最善手を調査し出力する関数
+// 最善手を調査し出力する関数（エラー出てる）
 int getNextIndex(int Advance, int board[SIZE][SIZE]){
     int maxIndexRow = 0; //評価値が最大の手の行番号
     int maxIndexCol = 0; //評価値が最大の手の列番号
