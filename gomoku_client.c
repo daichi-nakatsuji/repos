@@ -9,22 +9,22 @@ int your = 1;			//自分の手を1に設定
 int com = 2;			//相手の手を２に設定
 
 /*自分の評価値の重み 適宜追加*/
-int W1_1=0.9; //四四（自身が後攻のとき打てる）
-int W1_2=0.8; //三四
-int W1_3=0.7; //４連
-int W1_4=0.5; //三三 (自身が後攻のとき打てる）
-int W1_5=0.4; //三
-int W1_6=0.3; //二
-int W1_7=0.2; //一
+double W1_1=0.9; //四四（自身が後攻のとき打てる）
+double W1_2=0.8; //三四
+double W1_3=0.7; //４連
+double W1_4=0.5; //三三 (自身が後攻のとき打てる）
+double W1_5=0.4; //三
+double W1_6=0.3; //二
+double W1_7=0.2; //一
 
 /*相手の評価値の重み 適宜追加*/
-int W2_1=0.8; //三四
-int W2_2=0.7; //四四(相手が後攻のとき打たれる)
-int W2_3=0.6; //四連
-int W2_4=0.5; //三々(相手が後攻のとき打たれる)
-int W2_5=0.4; //三連
-int W2_6=0.3; //2連
-int W2_7=0.2; //一連
+double W2_1=0.8; //三四
+double W2_2=0.7; //四四(相手が後攻のとき打たれる)
+double W2_3=0.6; //四連
+double W2_4=0.5; //三々(相手が後攻のとき打たれる)
+double W2_5=0.4; //三連
+double W2_6=0.3; //2連
+double W2_7=0.2; //一連
 
 // 盤の初期化(追加条項、削除不可)
 void initializeBoard(int board[SIZE][SIZE]) {
@@ -627,41 +627,41 @@ int checkThreeAndFourInRow(int board[SIZE][SIZE], int row, int col, int player) 
     return threeInRow && fourInRow;
 }
 
-int CheckScore(int Advance, int board[SIZE][SIZE], int row, int col){
-    int score1 = 0; //自分の評価値
-    int score2 = 0; //相手の評価値
+double CheckScore(int Advance, int board[SIZE][SIZE], int row, int col){
+    double score1 = 0.0; //自分の評価値
+    double score2 = 0.0; //相手の評価値
     //自分に対する各メソッドの評価値
-    int s1_1=0;//四四禁
-    int s1_4=0;//三三禁
+    double s1_1=0.0;//四四禁
+    double s1_4=0.0;//三三禁
     if(Advance == 2){ //自分が後攻の場合
         s1_1 = yonyonkin(board, com , your, row, col) * W1_1; //四四
         s1_4 = sansankin(board, com, your, row, col) * W1_4; //三三
     }
-    int s1_2 = checkThreeAndFourInRow(board, row , col, your) * W1_2; //三四
-    int s1_3 = checkFourInRow(board, row , col, your) * W1_3; //四連
-    int s1_5 = checkThreeInRow(board, row, col, your) * W1_5;//三連
-    int s1_6 = checkTwoInRow(board, row, col, your) * W1_6; //二連
-    int s1_7 = checkOneInRow(board, row, col, your) * W1_7; //一連
+    double s1_2 = checkThreeAndFourInRow(board, row , col, your) * W1_2; //三四
+    double s1_3 = checkFourInRow(board, row , col, your) * W1_3; //四連
+    double s1_5 = checkThreeInRow(board, row, col, your) * W1_5;//三連
+    double s1_6 = checkTwoInRow(board, row, col, your) * W1_6; //二連
+    double s1_7 = checkOneInRow(board, row, col, your) * W1_7; //一連
 
     //相手に対する各メソッドの評価値
-    int s2_2=0;//四四禁
-    int s2_4=0;//三三禁
+    double s2_2=0.0;//四四禁
+    double s2_4=0.0;//三三禁
     if(Advance == 1){ //相手が後攻の場合
         s2_2 = yonyonkin(board, com , your, row, col) * W2_2; //四四
         s2_4 = sansankin(board, com, your, row, col) * W2_4; //三三
     }
-    int s2_1 = checkThreeAndFourInRow(board, row, col, com) * W2_1;//三四
-    int s2_3 = checkFourInRow(board, row , col, com) * W2_3;//四連
-    int s2_5 = checkThreeInRow(board, row, col, com) * W2_5;//三連
-    int s2_6 = checkTwoInRow(board, row, col, com) * W2_6; //二連
-    int s2_7 = checkOneInRow(board, row, col, com) * W2_7; //一連
+    double s2_1 = checkThreeAndFourInRow(board, row, col, com) * W2_1;//三四
+    double s2_3 = checkFourInRow(board, row , col, com) * W2_3;//四連
+    double s2_5 = checkThreeInRow(board, row, col, com) * W2_5;//三連
+    double s2_6 = checkTwoInRow(board, row, col, com) * W2_6; //二連
+    double s2_7 = checkOneInRow(board, row, col, com) * W2_7; //一連
 
     //各scoreでの総計
     score1 = s1_1 + s1_2 + s1_3 + s1_4 + s1_5 + s1_6 + s1_7;
     score2 = s2_1 + s2_2 + s2_3 + s2_4 + s2_5 + s2_6 + s2_7;
 
     //総scoreの集計
-    int score = score1 + score2;
+    double score = score1 + score2;
     return score;
 }
 
@@ -737,10 +737,10 @@ int checkWin(int board[SIZE][SIZE], int player, int row, int col) {
 
 // 最善手を調査し出力する関数
 void getNextIndex(int Advance, int board[SIZE][SIZE], int *Rrow, int *Rcol){
-    int maxIndexRow = 0; //評価値が最大の手の行番号
-    int maxIndexCol = 0; //評価値が最大の手の列番号
-    int maxScore = 0; //最大評価値
-    int result[2] = {0,0}; //最大の評価値を取る配列の行列番号(index)を格納
+    double maxScore = 0.0; //最大評価値
+    double score;
+    *Rrow = 0;
+    *Rcol = 0;
 
     for(int i = 0; i < SIZE; i++){
         for(int j = 0; j < SIZE; j++){
@@ -771,14 +771,13 @@ void getNextIndex(int Advance, int board[SIZE][SIZE], int *Rrow, int *Rcol){
                     break;
                 }
                 //累積評価値の算出
-                int score = CheckScore(Advance, board, row, col); //評価値の計算
+                score = CheckScore(Advance, board, row, col); //評価値の計算
                 if (score > maxScore) {
                     *Rrow = row;
                     *Rcol = col;
                     maxScore = score;
                 }
-                *Rrow = row;
-                *Rcol = col;
+                printf("%lf,%lf\n", score, maxScore);
             }continue; //盤面が1or2の場合
             
         }
