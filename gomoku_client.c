@@ -853,7 +853,10 @@ int main(void) {
 				break;
 			}
             isFirst = FALSE;
-		}else{
+		}else if(strcmp(buffer2, "end") == 0){
+            printf("gmae end");
+            break;
+        }else{
 			// 相手の手を代入(追加事項、削除不可)
 			if(strcmp(buffer2, "start") != 0){
                 sscanf(buffer2, "%d,%d", &row, &col);
@@ -884,6 +887,7 @@ int main(void) {
 			if(checkWin(board, your, row, col)){
                 sprintf(msg, "%d,%d,win", row, col);
             }
+            printf("自身の手:%s\n", msg);
 
 		}
 		//サーバにデータを送信
