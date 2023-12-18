@@ -609,7 +609,7 @@ int checkForbiddenMoves(int board[SIZE][SIZE], int FstPlayer, int SecPlayer, int
 	return 0;	//禁じ手なし
 }
 
-// 同時に三連と四連ができるかを判定する関数(変更したい)
+// 同時に三連と四連ができるかを判定する関数
 int checkThreeAndFourInRow(int board[SIZE][SIZE], int row, int col, int player) {
     // 与えられた座標に仮の手を打つ
     board[row][col] = player;
@@ -735,8 +735,8 @@ int checkWin(int board[SIZE][SIZE], int player, int row, int col) {
     return 0; // 勝利なし
 }
 
-// 最善手を調査し出力する関数（エラー出てる）
-int getNextIndex(int Advance, int board[SIZE][SIZE]){
+// 最善手を調査し出力する関数
+void getNextIndex(int Advance, int board[SIZE][SIZE], int *Rrow, int *Rcol){
     int maxIndexRow = 0; //評価値が最大の手の行番号
     int maxIndexCol = 0; //評価値が最大の手の列番号
     int maxScore = 0; //最大評価値
@@ -755,36 +755,34 @@ int getNextIndex(int Advance, int board[SIZE][SIZE]){
                 //最善手調査
                 //自分の勝利判断
                 if(checkWin(board, your, row, col)){
-                    result[0] = row;
-                    result[1] = col;
-                    return result;
+                    *Rrow = row;
+                    *Rcol = col;
+                    break;
                 }
                 //相手の勝利判断
                 if(checkWin(board, com, row, col)){
-                    result[0] = row;
-                    result[1] = col;
-                    return result;
+                    *Rrow = row;
+                    *Rcol = col;
+                    break;
                 }
                 if(Advance = 1 && checkLongRen(board, com, row, col) == 1){///相手が後攻で、長連を作れる場合
-                    result[0] = row;
-                    result[1] = col;
-                    return result;
+                    *Rrow = row;
+                    *Rcol = col;
+                    break;
                 }
                 //累積評価値の算出
                 int score = CheckScore(Advance, board, row, col); //評価値の計算
                 if (score > maxScore) {
-                    result[0] = row;
-                    result[1] = col;
+                    *Rrow = row;
+                    *Rcol = col;
                     maxScore = score;
                 }
-                result[0] = maxIndexRow;
-                result[1] = maxIndexCol;
+                *Rrow = row;
+                *Rcol = col;
             }continue; //盤面が1or2の場合
             
         }
     }
-    return result;
-
 }
 
 int main(void) {	
@@ -879,12 +877,12 @@ int main(void) {
 			}
 
 			//自分の手を決定(今後変更)
-			int *nextpoint = getNextIndex(Advance, board);
-            sprintf(msg, "%d,%d", nextpoint[0], nextpoint[1]);
+			getNextIndex(Advance, board, &row, &col);
+            sprintf(msg, "%d,%d", row, col);
 
 			//勝利判断(今後追加)
 			if(checkWin(board, your, row, col)){
-                sprintf(msg, "%d,%d,win", nextpoint[0], nextpoint[1]);
+                sprintf(msg, "%d,%d,win", row, col);
             }
 
 		}
