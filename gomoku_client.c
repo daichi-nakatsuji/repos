@@ -882,6 +882,7 @@ int main(void) {
 			//©•ª‚Ìè‚ğŒˆ’è(¡Œã•ÏX)
 			getNextIndex(Advance, board, &row, &col);
             sprintf(msg, "%d,%d", row, col);
+            board[row][col] = your;
 
 			//Ÿ—˜”»’f(¡Œã’Ç‰Á)
 			if(checkWin(board, your, row, col)){
