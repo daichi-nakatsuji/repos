@@ -739,8 +739,8 @@ int checkWin(int board[SIZE][SIZE], int player, int row, int col) {
 void getNextIndex(int Advance, int board[SIZE][SIZE], int *Rrow, int *Rcol){
     double maxScore = 0.0; //最大評価値
     double score;
-    *Rrow = 0;
-    *Rcol = 0;
+    *Rrow = 7;
+    *Rcol = 7;
 
     for(int i = 0; i < SIZE; i++){
         for(int j = 0; j < SIZE; j++){
@@ -777,7 +777,6 @@ void getNextIndex(int Advance, int board[SIZE][SIZE], int *Rrow, int *Rcol){
                     *Rcol = col;
                     maxScore = score;
                 }
-                printf("%lf,%lf\n", score, maxScore);
             }continue; //盤面が1or2の場合
             
         }
@@ -880,14 +879,15 @@ int main(void) {
 
 			//自分の手を決定(今後変更)
 			getNextIndex(Advance, board, &row, &col);
-            sprintf(msg, "%d,%d", row, col);
             board[row][col] = your;
-
-			//勝利判断(今後追加)
+            //勝利判断(今後追加)
 			if(checkWin(board, your, row, col)){
-                sprintf(msg, "%d,%d,win", row, col);
+                sprintf(msg, "%d,%d,win", row+1, col+1);
+            }else{
+                sprintf(msg, "%d,%d", row+1, col+1);
             }
-            printf("自身の手:%s\n", msg);
+
+            printf("自身の手:%s\n\n", msg);
 
 		}
 		//サーバにデータを送信
