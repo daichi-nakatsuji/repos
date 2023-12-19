@@ -535,13 +535,17 @@ int yonyonkin(int board[SIZE][SIZE], int FstPlayer, int SecPlayer, int row, int 
 
 // í∑òAÇ™ê¨óßÇµÇƒÇ¢ÇÈÇ©ÇîªíËÇ∑ÇÈä÷êî
 int checkLongRen(int board[SIZE][SIZE],int player, int row, int col) {
+    board[row][col] = player;
     // â°ï˚å¸
     int consecutiveCount = 0;
     for (int i = col - 5; i <= col + 5; i++) {
         if (i < 0 || i >= SIZE) continue;
         if (board[row][i] == player) {
             consecutiveCount++;
-            if (consecutiveCount == 6) return 1; //ã÷Ç∂éË
+            if (consecutiveCount == 6){
+                board[row][col] = 0;
+                return 1; //ã÷Ç∂éË
+            }
         } else {
             consecutiveCount = 0;
         }
@@ -553,7 +557,10 @@ int checkLongRen(int board[SIZE][SIZE],int player, int row, int col) {
         if (i < 0 || i >= SIZE) continue;
         if (board[i][col] == player) {
             consecutiveCount++;
-            if (consecutiveCount == 6) return 1; //ã÷Ç∂éË
+            if (consecutiveCount == 6){
+                board[row][col] = 0;
+                return 1; //ã÷Ç∂éË
+            }
         } else {
             consecutiveCount = 0;
         }
@@ -567,7 +574,10 @@ int checkLongRen(int board[SIZE][SIZE],int player, int row, int col) {
         if (r < 0 || r >= SIZE || c < 0 || c >= SIZE) continue;
         if (board[r][c] == player) {
             consecutiveCount++;
-            if (consecutiveCount == 6) return 1; //ã÷Ç∂éË
+            if (consecutiveCount == 6){
+                board[row][col] = 0;
+                return 1; //ã÷Ç∂éË
+            }
         } else {
             consecutiveCount = 0;
         }
@@ -581,7 +591,10 @@ int checkLongRen(int board[SIZE][SIZE],int player, int row, int col) {
         if (r < 0 || r >= SIZE || c < 0 || c >= SIZE) continue;
         if (board[r][c] == player) {
             consecutiveCount++;
-            if (consecutiveCount == 6) return 1; //ã÷Ç∂éË
+            if (consecutiveCount == 6){
+                board[row][col] = 0;
+                return 1; //ã÷Ç∂éË
+            }
         } else {
             consecutiveCount = 0;
         }
@@ -748,7 +761,7 @@ void getNextIndex(int Advance, int board[SIZE][SIZE], int *Rrow, int *Rcol){
                 int row = i;
                 int col = j;
                 // ã÷Ç∂éËÇÃîªíf(í«â¡éñçÄÅAçÌèúïsâ¬)
-                if(Advance == com && checkForbiddenMoves(board, com, your, row, col) == 1){
+                if(Advance == your && checkForbiddenMoves(board, your, com, row, col) == 1){
                     continue;
                 }
 
@@ -777,8 +790,9 @@ void getNextIndex(int Advance, int board[SIZE][SIZE], int *Rrow, int *Rcol){
                     *Rcol = col;
                     maxScore = score;
                 }
+
+                board[row][col] = 0;
             }continue; //î’ñ Ç™1or2ÇÃèÍçá
-            
         }
     }
 }
